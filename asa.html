@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Button Interaction</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+  body {
+    background-color: #b293bd; /* Set the background color */
+    margin: 0; /* Remove default body margin */
+    padding: 0; /* Remove default body padding */
+  }
+  .valentine-container {
+    text-align: center;
+    margin-top: 50px;
+    max-width: 400px; /* Limit the maximum width of the container */
+    margin: 0 auto; /* Center the container horizontally */
+  }
+  .question {
+    margin-bottom: 20px; /* Add space between the question and buttons */
+  }
+  #valentineImg {
+    max-width: 100%; /* Ensure the image does not exceed its container's width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Prevents any extra spacing below the image */
+    margin: 20px auto; /* Center the image horizontally with margin */
+  }
+</style>
+</head>
+<body>
+
+<div class="valentine-container" id="valentineContainer">
+  <img
+    id="valentineImg"
+    alt="drinks"
+    src="drink.png"
+  />
+  <div class="question">Can I be your valentine?</div>
+  <div class="btn-group">
+    <button id="yesBtn" class="btn btn-success yesButton">YES</button>
+    <button id="noBtn" class="btn btn-danger noButton">No</button>
+  </div>
+</div>
+
+<script>
+  const phrases = [
+    "try again",
+    "are you sure??",
+    "be fr now",
+    "reconsider?",
+    "is that your final answer?",
+  ];
+
+  let noCount = 0;
+  let yesButtonSize = 16; // Initial size
+
+  const yesButton = document.getElementById('yesBtn');
+  const noButton = document.getElementById('noBtn');
+  const valentineContainer = document.getElementById('valentineContainer');
+
+  function handleNoClick() {
+    noCount++;
+    const noButtonText = phrases[Math.min(noCount, phrases.length - 1)];
+    noButton.innerText = noButtonText;
+
+    // Increase size of Yes button
+    yesButtonSize += 5; // Increase size on each "No" click
+    yesButton.style.fontSize = `${yesButtonSize}px`;
+  }
+  
+  function handleYesClick() {
+    valentineContainer.innerHTML = ''; // Clear container
+
+    // Display "YAYYYY" text
+    const yayText = document.createElement('div');
+    yayText.innerText = 'YAYYYY';
+    yayText.classList.add('text');
+    valentineContainer.appendChild(yayText);
+
+    // Show a new picture
+    const newImg = document.createElement('img');
+    newImg.src = "yay.png";
+    newImg.id = "valentineImg"; // Set ID for new image
+    valentineContainer.appendChild(newImg);
+  }
+
+  noButton.addEventListener('click', handleNoClick);
+  yesButton.addEventListener('click', handleYesClick);
+</script>
+
+</body>
+</html>
